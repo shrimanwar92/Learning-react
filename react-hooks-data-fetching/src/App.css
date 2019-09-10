@@ -1,0 +1,42 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    /*border: 1px solid red;*/
+    align-items: center;
+}
+
+.search-input {
+    padding-top: 36px;
+}
+
+.search-input input {
+    height: 28px;
+    width: 300px;
+    padding: 4px;
+    padding-left: 14px;
+    font-size: 16px;
+}
+
+.hits-list {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid lightgray;
+    list-style-type: none;
+    align-items: center;
+    padding: 0;
+}
+
+.hits-list li {
+    margin: 10px;
+    padding: 10px;
+    width: 700px;
+    border: 1px solid lightgray;
+    background-color: aliceblue;
+}
