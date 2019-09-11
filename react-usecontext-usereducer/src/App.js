@@ -76,9 +76,7 @@ function App() {
       <div className="container">
         <TaskInput addTodo={add}/>
         <Filter currentFilter={(e) => setFilter(e)} />
-        <div className="todo-list-container">
-          <TodoList list={filteredTodos} updateList={updateTodoList} />
-        </div>
+        <TodoList list={filteredTodos} updateList={updateTodoList} />
       </div>
     </div>
   );

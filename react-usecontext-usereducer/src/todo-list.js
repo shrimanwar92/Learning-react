@@ -7,11 +7,13 @@ const TodoList = ({list, updateList}) => {
 	};
 	
 	return(
-		<ul>
-	        {list.map(todo => (
-	          <Todo key={todo.id} todo={todo} updateTodo={handleUpdate}/>
-	        ))}
-      	</ul>
+		<div className="todo-list-container">
+			<ul>
+		        {list.map(todo => (
+		          <Todo key={todo.id} todo={todo} updateTodo={handleUpdate}/>
+		        ))}
+	      	</ul>
+	    </div>
 	);
 };
 
