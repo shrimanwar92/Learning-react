@@ -1,0 +1,86 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+  color: #fff;
+  background-color: red;
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 1024px;
+  align-items: center;
+}
+
+.todo-input-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+  width: 600px;
+}
+
+.todo-input-container input {
+  height: 28px;
+  width: 300px;
+  border-radius: 4px;
+  padding-left: 12px;
+  padding-right: 12px;
+  font-size: 16px;
+}
+.todo-input-container .submit {
+  height: 35px;
+  width: 117px;
+  border-radius: 4px;
+  padding-left: 12px;
+  padding-right: 12px;
+  font-size: 16px;
+  margin-left: 16px;
+}
+
+.todo-list-container {
+  display: flex;
+  justify-content: center;
+  width: 600px;
+  /*border: 1px solid red;*/
+}
+
+.todo-list-container .item {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid green;
+  border-radius: 4px;
+  color: #000;
+  background-color: aliceblue;
+  width: 579px;
+}
+
+.todo-list-container ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.todo-list-container li {
+  text-align: center;
+}
+
+.todo-list-container li.complete {
+  text-decoration: line-through;
+}
