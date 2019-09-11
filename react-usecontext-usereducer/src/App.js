@@ -1,9 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useReducer} from 'react';
 import Header from './header';
 import './App.css';
 import TaskInput from './task-input';
 import uuid from 'uuid/v4';
 import TodoList from './todo-list';
+import Filter from './filter';
 
 const initialTodos = [
   {
@@ -24,35 +25,59 @@ const initialTodos = [
 ];
 
 function App() {
-  const [todos, setTodos] = useState(initialTodos);
+  const [filter, setFilter] = useState(-1);
 
-  /*useEffect(() => {
-
-  }, [todos]);*/
+  const [todos, dispatchTodos] = useReducer(function(state, action) {
+    switch(action.type) {
+      case 'ADD_TODO':
+        return [...state, action.item];
+      break;
+      case 'UPDATE_TODO':
+        return state.map(todo => {
+          if (todo.id === action.id) {
+            return { ...todo, complete: !todo.complete };
+          } else {
+            return todo;
+          }
+      });
+      break;
+    }
+  },initialTodos);
 
   const add = (todo) => {
-    setTodos([...todos, {id: uuid(), name: todo, complete: false}]);
+    const item = {
+      id: uuid(),
+      name: todo,
+      complete: false
+    }
+    dispatchTodos({type: 'ADD_TODO', item: item});
   };
 
-  const updateTodoList = (id) => {
-    let updatedTodos = todos.map(todo => {
-      if(todo.id == id) {
-        todo.complete = !todo.complete;
-      }
-
-      return todo;
-    });
-
-    setTodos(updatedTodos);
+  const updateTodoList = (id) => {    
+    dispatchTodos({type: 'UPDATE_TODO', id: id});
   };
+
+  const filteredTodos = todos.filter(todo => {
+    if (filter === -1) {
+      return true;
+    }
+    if (filter === 1 && todo.complete) {
+      return true;
+    }
+    if (filter === 0 && !todo.complete) {
+      return true;
+    }
+    return false;
+  });
   
   return (
     <div className="main">
       <Header />
       <div className="container">
         <TaskInput addTodo={add}/>
+        <Filter currentFilter={(e) => setFilter(e)} />
         <div className="todo-list-container">
-          <TodoList list={todos} updateList={updateTodoList} />
+          <TodoList list={filteredTodos} updateList={updateTodoList} />
         </div>
       </div>
     </div>
