@@ -1,58 +1,48 @@
-import React, {useState, useEffect, useRef} from 'react';
-import axios from 'axios';
+import React, {useRef, Fragment, useState} from 'react';
 import './App.css';
+import useHackerNewsApi from './HackerNewsApi';
+import Header from './Header';
 
 function App() {
-    const [data, setData] = useState({ hits: [] });
-    const [query, setQuery] = useState('redux');
-    const [isLoading, setIsLoading] = useState(false);
-    const [isError, setIsError] = useState(false);
+    const [search, setSearch] = useState('');
+    const url = `https://hn.algolia.com/api/v1/search?query=redux`;
+    const [data, setUrl] = useHackerNewsApi(url, {hits: []});
 
-    const searchInput = useRef();
-
-    useEffect(() => {
-      const fetchData = async() => {
-          setIsLoading(true);
-          setIsError(false);
-          try {
-              const result = await axios(`https://hn.algolia.com/api/v1/search?query=${query}`);
-              setData(result.data);
-          } catch(e) {
-              setIsError(true);
-          } finally {
-              setIsLoading(false);
-          }
-      };
-
-      fetchData();
-    }, [query]);
-
-    const search = (e) => {
+    const searchNews = (e) => {
         if(e.which == 13) {
-            setQuery(searchInput.current.value);
+            setUrl(`https://hn.algolia.com/api/v1/search?query=${search}`);
         }
+    };
+
+    const clear = (e) => {
+      setSearch('');
+      setUrl(url);
     };
     
     return (
+    <Fragment>
+    <Header />
     <div className="container">
         <div className="search-input">
-            <input type="text" ref={searchInput} onKeyUp={search} placeholder="Press enter to search"/>
+            <input type="text" maxLength={30} onKeyUp={searchNews} value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Press enter to search"/>
+            <span className="cancel" onClick={clear}>x</span>
         </div>
 
-        {isError && <div className="error">Something went wrong...</div>}
+        {data.isError && <div className="error">Something went wrong...</div>}
 
-        {isLoading ? (
+        {data.isLoading ? (
             <div className="loading">Loading</div>
         ) : (
             <ul className="hits-list">
-            {data.hits.map(item => (
+            {data.payload.hits.map(item => (
                 <li key={item.objectID}>
-                    <a href={item.url}>{item.title}</a>
+                    <a href={item.url} target="_blank">{item.title}</a>
                 </li>
             ))}
         </ul>
         )}
     </div>
+    </Fragment>
     );
 }
 

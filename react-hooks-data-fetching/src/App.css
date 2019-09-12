@@ -4,6 +4,16 @@ body {
     box-sizing: border-box;
 }
 
+.header-container {
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    background-color: lightblue;
+    padding: 20px 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -13,6 +23,15 @@ body {
 
 .search-input {
     padding-top: 36px;
+}
+
+.cancel {
+    font-size: 24px;
+    font-weight: 600;
+    position: relative;
+    right: 24px;
+    top: 1px;
+    cursor: pointer;
 }
 
 .search-input input {
