@@ -3,6 +3,21 @@ import './App.css';
 import useHackerNewsApi from './HackerNewsApi';
 import Header from './Header';
 
+function List({list}) {
+  if (!list.length) {
+    return <div>Nothing to show...</div>;
+  }
+  return (
+      <ul className="hits-list">
+          {list.map(item => (
+              <li key={item.objectID}>
+                  <a href={item.url} target="_blank">{item.title}</a>
+              </li>
+          ))}
+      </ul>
+  );
+}
+
 function App() {
     const [search, setSearch] = useState('');
     const url = `https://hn.algolia.com/api/v1/search?query=redux`;
@@ -33,13 +48,7 @@ function App() {
         {data.isLoading ? (
             <div className="loading">Loading</div>
         ) : (
-            <ul className="hits-list">
-            {data.payload.hits.map(item => (
-                <li key={item.objectID}>
-                    <a href={item.url} target="_blank">{item.title}</a>
-                </li>
-            ))}
-        </ul>
+            <List list={data.payload.hits} />
         )}
     </div>
     </Fragment>
