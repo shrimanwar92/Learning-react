@@ -1,0 +1,25 @@
+.users-container {
+	display: flex;
+	justify-content: center;
+	width: 1024px;
+	align-items: center;
+	border: 1px solid red;
+}
+
+.github-finder__user-list {
+	
+}
+
+
+
+
+
+.github-finder__user {
+	height: 251px;
+	width: 300px;
+}
+
+.github-finder__user img {
+	height: 120px;
+	width: 120px;
+}
