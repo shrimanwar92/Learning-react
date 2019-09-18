@@ -1,6 +1,7 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext} from 'react';
 import GithubContext from './../context/github.context';
 import {Link} from 'react-router-dom';
+import Search from './search.component';
 
 const Users = () => {
 	const githubContext = useContext(GithubContext);
@@ -11,11 +12,14 @@ const Users = () => {
 		return <div className="content">Loading...</div>;
 	} else {
 		return(
-			<div className="content">
-        		{users.map(user => (
-          			<UserItem key={user.id} user={user} />
-        		))}
-      		</div>
+			<React.Fragment>
+				<Search />
+				<div className="content">
+	        		{users.map(user => (
+	          			<UserItem key={user.id} user={user} />
+	        		))}
+	      		</div>
+	      	</React.Fragment>
 		);
 	}
 
