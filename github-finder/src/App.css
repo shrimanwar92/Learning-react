@@ -67,7 +67,7 @@ header .links {
 	border: none;
 }
 
-.users-list {
+.content {
 	grid-area: content;
 	display: flex;
     justify-content: center;
@@ -100,4 +100,48 @@ footer {
 	color: #fff;
 	background-color: #062e79;
 	width: 100%;
+	margin-top: 60px;
+}
+
+.repos-list {
+	grid-area: content;
+	list-style-type: none;
+	display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+}
+
+.repo-item {
+	margin: 0.5em;
+	padding: 0.5em;
+	border: 1px solid dodgerblue;
+	width: 600px;
+    height: 100px;
+    background-color: aliceblue;
+    overflow: auto;
+}
+
+.repo-item .name {
+	font-size: 1.25rem;
+    line-height: inherit;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.repo-item .details {
+	display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+}
+
+.repo-item .description {
+	padding-top: 33px;
+    position: relative;
+}
+
+.repo-image {
+	width: 50px;
+	position: absolute;
 }

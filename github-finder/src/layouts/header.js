@@ -6,7 +6,7 @@ const Header = () => {
 		<header>
 			<div className="links">
 				<Router>
-					<Link to="/users" className="navbar-brand">
+					<Link to="/">
 						<img
 							src="https://user-images.githubusercontent.com/901123/27444852-9f382708-5745-11e7-959f-a2bed199f83f.png"
 							width="30"

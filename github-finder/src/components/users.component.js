@@ -1,6 +1,6 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import GithubContext from './../context/github.context';
-import {BrowserRouter as Router, Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 const Users = () => {
 	const githubContext = useContext(GithubContext);
@@ -31,11 +31,11 @@ const UserItem = ({user}) => {
 	    		className='round-img'
 	    		style={{ width: '60px' }}
 	  		/>
-	  		<Router>
-				<Link to="/profile">
-			    	<h3>{user.login}</h3>
-			    </Link>
-			</Router>
+	  		
+			<Link to={`/profile/${user.login}`}>
+		    	<h3>{user.login}</h3>
+		    </Link>
+			
 		</div>
 	);
 };
