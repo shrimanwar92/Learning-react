@@ -20,7 +20,5 @@ function Pagination(collection, itemsPerPage) {
 Pagination.prototype.pageItem = function(index) {
 	return this.collectionPerPage[index];
 };
-// p = new Pagination([1,2,3,4,5,6], 4);
-// console.log(p);
 
 export default Pagination;

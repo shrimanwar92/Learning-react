@@ -9,25 +9,39 @@ const Shipments = () => {
 		loading: false
 	};
 
+	let paginate = undefined;
+
 	const [page, setPage] = useState(0);
 
 	const [state, dispatch] = useReducer(ShipmentsReducer, initialState);
 
 	useEffect(() => {
-		getShipments();
+		if(!paginate) {
+			getShipments().then(() => {
+				getShipmentsPerPage(page);
+			});
+		} else {
+			console.log('--->', page);
+		}
+		
 	}, [page]);
 
 	const getShipments = async() => {
 		dispatch({type: 'SET_LOADING'});
 		const response = await axios.get('./db.json');
-		dispatch({type: 'GET_SHIPMENTS', payload: response.data.shipments});
-		const paginate = new Pagination(response.data.shipments, 20);
-		console.log(paginate);
+		paginate = new Pagination(response.data.shipments, 20);
+	};
+
+	const getShipmentsPerPage = (page) => {
+		if(paginate) {
+			dispatch({type: 'GET_SHIPMENTS', payload: paginate.collectionPerPage[page]});
+			setPage(1);
+		}
 	};
 
 	return (
 		<div className='shipments-list'>
-			{JSON.stringify(state.shipments)}
+			{JSON.stringify(state.shipments.length)}
 		</div>
 	);
 };
